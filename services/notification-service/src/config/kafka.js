@@ -1,4 +1,4 @@
-const { Kafka } = require("kafkajs");
+import { Kafka } from "kafkajs";
 
 const {
   kafkaBrokers,
