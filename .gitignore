@@ -1,3 +1,5 @@
 .env
 api-gateway/.env
 api-gateway/node_modules
+services/notification-service/.env
+services/notification-service/node_modules
