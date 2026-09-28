@@ -21,5 +21,6 @@ dotenv.config();
     kafkaClientId: process.env.KAFKA_CLIENT_ID || "notification-service",
     kafkaGroupId: process.env.KAFKA_GROUP_ID || "notification-email-group",
     emailTopic: process.env.KAFKA_EMAIL_TOPIC || "email.notification",
+    redisUrl: process.env.AUTH_REDIS_URL || "redis://localhost:6379",
     port: Number(process.env.PORT) || 5000,
  }
