@@ -27,3 +27,4 @@ document = None
 
 embedding_model = None
 vectors = None
+search_results = None
