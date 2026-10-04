@@ -20,6 +20,13 @@ router.use(
         changeOrigin: true
     })
 );
+router.use(
+    "/search",
+    createProxyMiddleware({
+        target: services.search,
+        changeOrigin: true
+    })
+);
 
 router.use(
     "/products",
