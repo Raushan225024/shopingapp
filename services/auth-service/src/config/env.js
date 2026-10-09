@@ -13,14 +13,24 @@ dotenv.config();
     }
     i++;
  }
- module.exports ={
-    nodeEnv: process.env.NODE_ENV || "development",
-    resendApiKey: process.env.RESEND_API_KEY,
-    emailFrom: process.env.EMAIL_FROM,
-    kafkaBrokers: process.env.KAFKA_BROKERS,
-    kafkaClientId: process.env.KAFKA_CLIENT_ID || "notification-service",
-    kafkaGroupId: process.env.KAFKA_GROUP_ID || "notification-email-group",
-    emailTopic: process.env.KAFKA_EMAIL_TOPIC || "email.notification",
-    redisUrl: process.env.AUTH_REDIS_URL || "redis://localhost:6379",
-    port: Number(process.env.PORT) || 5000,
- }
+ 
+    const nodeEnv = process.env.NODE_ENV || "development";
+    const resendApiKey = process.env.RESEND_API_KEY;
+    const emailFrom = process.env.EMAIL_FROM;
+    const kafkaBrokers = process.env.KAFKA_BROKERS ;
+    const kafkaClientId = process.env.KAFKA_CLIENT_ID || "notification-service";
+    const kafkaGroupId = process.env.KAFKA_GROUP_ID || "notification-email-group";
+    const emailTopic = process.env.KAFKA_EMAIL_TOPIC || "email.notification";
+    const redisUrl = process.env.AUTH_REDIS_URL || "redis://localhost:6379";
+    const port = Number(process.env.PORT) || 5002;
+export {
+    nodeEnv,
+    resendApiKey,
+    emailFrom,
+    kafkaBrokers,
+    kafkaClientId,
+    kafkaGroupId,
+    emailTopic,
+    redisUrl,
+    port
+};
