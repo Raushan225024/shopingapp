@@ -1,22 +1,25 @@
-import {kafka,producer} from "../config/kafka.js";
-import { otpTopic } from "../config/env.js";
-import {saveOtp, verifyOtp} from "../services/otp-service.js";
+import {producer} from "../config/kafka.js";
+import {emailTopic} from "../config/env.js";
+import {saveOTP, verifyOTP} from "../services/otp-service.js";
 
-exports.getOtp = async (req, res) => {
+export const getOtp = async (req, res) => {
     try {
-        const userId = req.body.userId;
+        const userId = req.query.email;
+        console.log("Received request for OTP for user:", userId);
         const otp = Math.floor(100000 + Math.random() * 900000).toString();
-        const result=await saveOtp(userId, otp);
-        if(!result.success){
-            return res.status(500).json({ error: result.message });
-        }
+       // const result=await saveOTP(userId, otp);
+       // cosole.log("OTP saved result:", result);
+       // if(!result.success){
+         //   return res.status(500).json({ error: result.message });
+        //}
         const message = {
             tosend: userId,
             subject: "<h1>OTP Verification</h1>",
             message: `<p>Your OTP is: <strong>${otp}</strong> don't share it with anyone.</p>`,
         };
+        
         await producer.send({
-            topic: otpTopic,
+            topic: emailTopic,
             messages: [ { value: JSON.stringify(message) } ]
         });
         res.status(200).json({ message: "OTP sent successfully" });
@@ -26,11 +29,11 @@ exports.getOtp = async (req, res) => {
     }
 };
 
-exports.verifyOtp = async (req, res) => {
+export const verifyOtp = async (req, res) => {
     try{
-        const userId = req.body.userId;
-        const otp = req.body.otp;
-        const result=await verifyOtp(userId, otp);
+        const userId = req.query.email;
+        const otp = req.query.otp;
+        const result=await verifyOTP(userId, otp);
         if(!result.success){
             return res.status(400).json({ error: result.message });
         }
