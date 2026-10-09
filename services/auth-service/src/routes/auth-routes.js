@@ -1,9 +1,9 @@
 import express from "express";
 const router = express.Router();
-import { getOtp,verifyOtp,} from "../controllers/auth-controller.js";
+import { getOtp,verifyOtp} from "../controllers/auth-controllers.js";
 
-router.post("/get-otp", getOtp);
-router.post("/verify-otp", verifyOtp);
+router.get("/get-otp", getOtp);
+router.get("/verify-otp", verifyOtp);
 router.get("/health", (req, res) => {
   res.status(200).json({
     service: "auth-service",
