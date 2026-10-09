@@ -1,9 +1,10 @@
 
-import { config } from "./src/config/env.js";
+import { port } from "./src/config/env.js";
 import app from "./app.js";
+import { producer } from "./src/config/kafka.js";
 
-const PORT = config.port || 3000;
-
+const PORT = port || 3000;
+await producer.connect();
 const server = app.listen(PORT, () => {
     console.log(`API Gateway running on port ${PORT}`);
 });
